@@ -1,14 +1,5 @@
 const sections = [
   {
-    title: 'Plataformas',
-    links: [
-      { name: 'Loft', url: 'https://loft.com.br/para-imobiliarias/financiamento-imobiliario/' },
-      { name: 'Rauzee', url: 'https://rauzee.com/recursos/site-imobiliario-integrado/' },
-      { name: 'Rauzee — Simulador', url: 'https://rauzee.com/blog/simulador-habitacional-da-rauzee-a-ferramenta-essencial-para-quem-quer-mais-agilidade/' },
-      { name: 'Homer', url: 'https://www.homer.com.br/creditoimobiliario/' },
-    ],
-  },
-  {
     title: 'Bancos',
     links: [
       { name: 'Banco do Brasil', url: 'https://www.bb.com.br/site/pra-voce/financiamentos/financiamento-imobiliario/' },
