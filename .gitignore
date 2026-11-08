@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Database
+*.sqlite
+*.db
+
+# Misc
+*.pem
+*.key
+*.crt
+*.pfx
+*.p12
+
+# Backend/Frontend specific
+backend/node_modules/
+backend/dist/
+backend/.env
+frontend/node_modules/
+frontend/dist/
+frontend/.env
