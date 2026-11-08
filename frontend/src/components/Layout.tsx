@@ -6,6 +6,7 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: DashboardIcon },
   { name: 'Clientes', href: '/clients', icon: UsersIcon },
   { name: 'Consultas', href: '/consultations', icon: SearchIcon },
+  { name: 'Serviços de Simulação', href: '/simulation-services', icon: LinkIcon },
   { name: 'Parceiros', href: '/partners', icon: BuildingIcon, roles: ['ADMIN'] },
   { name: 'Configurações', href: '/settings', icon: CogIcon, roles: ['ADMIN'] },
 ];
@@ -169,6 +170,14 @@ export function XIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  );
+}
+
+function LinkIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
     </svg>
   );
 }

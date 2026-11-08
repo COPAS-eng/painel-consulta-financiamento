@@ -14,8 +14,10 @@ import partnerRoutes from './routes/partners.js';
 import configRoutes from './routes/config.js';
 import { healthRoutes } from './routes/health.js';
 import path from 'node:path';
+import compression from 'compression';
 
 const app = express();
+app.use(compression());
 
 app.use(helmet({
   contentSecurityPolicy: {

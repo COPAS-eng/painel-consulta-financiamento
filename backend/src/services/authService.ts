@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { encrypt } from '../lib/encryption.js';
+import { AppError } from '../middleware/errorHandler.js';
 
 export interface RegisterInput {
   email: string;
@@ -82,7 +83,7 @@ export class AuthService {
   async login(input: LoginInput) {
     const user = await prisma.user.findUnique({ where: { email: input.email } });
     if (!user) {
-      throw new Error('Credenciais inválidas');
+      throw new AppError('Credenciais inválidas', 401, 'INVALID_CREDENTIALS');
     }
 
     if (user.status !== 'ACTIVE') {
@@ -91,7 +92,7 @@ export class AuthService {
 
     const valid = await bcrypt.compare(input.password, user.passwordHash);
     if (!valid) {
-      throw new Error('Credenciais inválidas');
+      throw new AppError('Credenciais inválidas', 401, 'INVALID_CREDENTIALS');
     }
 
     await prisma.user.update({

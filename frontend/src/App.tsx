@@ -12,6 +12,7 @@ const NewConsultationPage = lazy(() => import('./pages/NewConsultationPage').the
 const ConsultationDetailPage = lazy(() => import('./pages/ConsultationDetailPage').then(m => ({ default: m.ConsultationDetailPage })));
 const PartnersPage = lazy(() => import('./pages/PartnersPage').then(m => ({ default: m.PartnersPage })));
 const SettingsPage = lazy(() => import('./pages/SettingsPage').then(m => ({ default: m.SettingsPage })));
+const SimulationServicesPage = lazy(() => import('./pages/SimulationServicesPage').then(m => ({ default: m.SimulationServicesPage })));
 
 function PrivateRoute({ children, allowedRoles }: { children: React.ReactNode; allowedRoles?: string[] }) {
   const { user, isLoading, isAuthenticated } = useAuth();
@@ -54,6 +55,7 @@ function AppRoutes() {
         <Route path="/consultations/:id" element={<ConsultationDetailPage />} />
         <Route path="/partners" element={<PrivateRoute allowedRoles={['ADMIN']}><PartnersPage /></PrivateRoute>} />
         <Route path="/settings" element={<PrivateRoute allowedRoles={['ADMIN']}><SettingsPage /></PrivateRoute>} />
+        <Route path="/simulation-services" element={<SimulationServicesPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

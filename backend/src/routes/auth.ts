@@ -26,9 +26,13 @@ router.post('/login',
     body('password').notEmpty().withMessage('Senha é obrigatória'),
   ],
   validate,
-  async (req: AuthenticatedRequest, res: Response) => {
-    const result = await authService.login(req.body);
-    res.json(result);
+  async (req: AuthenticatedRequest, res: Response, next: (err?: unknown) => void) => {
+    try {
+      const result = await authService.login(req.body);
+      res.json(result);
+    } catch (err) {
+      next(err);
+    }
   }
 );
 
