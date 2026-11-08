@@ -13,6 +13,7 @@ import consultationRoutes from './routes/consultations.js';
 import partnerRoutes from './routes/partners.js';
 import configRoutes from './routes/config.js';
 import { healthRoutes } from './routes/health.js';
+import path from 'node:path';
 
 const app = express();
 
@@ -66,8 +67,14 @@ app.use('/api/consultations', authMiddleware, consultationRoutes);
 app.use('/api/partners', authMiddleware, partnerRoutes);
 app.use('/api/config', authMiddleware, configRoutes);
 
+const frontendDist = path.resolve(process.cwd(), '../frontend/dist');
+app.use(express.static(frontendDist));
 app.use((req, res) => {
-  res.status(404).json({ error: 'Rota não encontrada' });
+  if (req.path.startsWith('/api')) {
+    res.status(404).json({ error: 'Rota não encontrada' });
+    return;
+  }
+  res.sendFile(path.join(frontendDist, 'index.html'));
 });
 
 app.use(errorHandler);

@@ -17,15 +17,26 @@ const queryClient = new QueryClient({
   },
 });
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <AuthProvider>
-          <App />
-          <Toaster position="top-right" />
-        </AuthProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
-  </React.StrictMode>
-);
+const rootEl = document.getElementById('root')!;
+window.addEventListener('error', (e) => {
+  rootEl.innerHTML = '<pre style="padding:16px;color:#b91c1c;white-space:pre-wrap">' + (e?.message || e) + '</pre>';
+});
+window.addEventListener('unhandledrejection', (e) => {
+  rootEl.innerHTML = '<pre style="padding:16px;color:#b91c1c;white-space:pre-wrap">' + String(e?.reason) + '</pre>';
+});
+try {
+  ReactDOM.createRoot(rootEl).render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <AuthProvider>
+            <App />
+            <Toaster position="top-right" />
+          </AuthProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+} catch (err) {
+  rootEl.innerHTML = '<pre style="padding:16px;color:#b91c1c">' + String(err) + '</pre>';
+}

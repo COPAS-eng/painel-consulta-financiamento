@@ -31,12 +31,12 @@ export function Layout() {
       />
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transform transition-transform duration-200 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-primary-900 text-gray-100 transform transition-transform duration-200 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
         aria-label="Menu lateral"
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
-            <h1 className="text-xl font-bold text-primary-600">Painel Financiamento</h1>
+          <div className="flex items-center justify-between h-16 px-5 border-b border-white/10">
+            <h1 className="text-xl font-semibold text-white font-serif tracking-tight">Painel Financiamento</h1>
             <button
               className="lg:hidden p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100"
               onClick={() => setSidebarOpen(false)}
@@ -54,15 +54,15 @@ export function Layout() {
                 className={({ isActive }) =>
                   `flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
                     isActive
-                      ? 'bg-primary-50 text-primary-700'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                      ? 'bg-white/10 text-white'
+                      : 'text-gray-300 hover:bg-white/5 hover:text-white'
                   }`
                 }
                 onClick={() => setSidebarOpen(false)}
               >
                 {({ isActive }) => (
                   <>
-                    <item.icon className={`w-5 h-5 mr-3 ${isActive ? 'text-primary-600' : 'text-gray-400'}`} aria-hidden="true" />
+                    <item.icon className={`w-5 h-5 mr-3 ${isActive ? 'text-gold-400' : 'text-gray-400'}`} aria-hidden="true" />
                     {item.name}
                   </>
                 )}
@@ -70,21 +70,21 @@ export function Layout() {
             ))}
           </nav>
 
-          <div className="p-4 border-t border-gray-200">
+          <div className="p-4 border-t border-white/10">
             <div className="flex items-center px-3 py-2 mb-3">
-              <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
-                <span className="text-sm font-medium text-primary-700">
+              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                <span className="text-sm font-medium text-gold-400">
                   {user?.fullName?.charAt(0).toUpperCase()}
                 </span>
               </div>
               <div className="ml-3 flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">{user?.fullName}</p>
-                <p className="text-xs text-gray-500 capitalize">{user?.role?.toLowerCase()}</p>
+                <p className="text-sm font-medium text-white truncate">{user?.fullName}</p>
+                <p className="text-xs text-gray-400 capitalize">{user?.role?.toLowerCase()}</p>
               </div>
             </div>
             <button
               onClick={handleLogout}
-              className="w-full flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors"
+              className="w-full flex items-center px-3 py-2 text-sm font-medium text-gray-300 rounded-lg hover:bg-white/5 hover:text-white transition-colors"
             >
               <LogoutIcon className="w-5 h-5 mr-3 text-gray-400" aria-hidden="true" />
               Sair

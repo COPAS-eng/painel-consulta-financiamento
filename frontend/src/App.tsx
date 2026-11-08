@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import { Layout } from './components/Layout';
-import { LoginPage } from './pages/LoginPage';
-import { DashboardPage } from './pages/DashboardPage';
-import { ClientsPage } from './pages/ClientsPage';
-import { ClientFormPage } from './pages/ClientFormPage';
-import { ClientDetailPage } from './pages/ClientDetailPage';
-import { ConsultationsPage } from './pages/ConsultationsPage';
-import { NewConsultationPage } from './pages/NewConsultationPage';
-import { ConsultationDetailPage } from './pages/ConsultationDetailPage';
-import { PartnersPage } from './pages/PartnersPage';
-import { SettingsPage } from './pages/SettingsPage';
+const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m.LoginPage })));
+const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
+const ClientsPage = lazy(() => import('./pages/ClientsPage').then(m => ({ default: m.ClientsPage })));
+const ClientFormPage = lazy(() => import('./pages/ClientFormPage').then(m => ({ default: m.ClientFormPage })));
+const ClientDetailPage = lazy(() => import('./pages/ClientDetailPage').then(m => ({ default: m.ClientDetailPage })));
+const ConsultationsPage = lazy(() => import('./pages/ConsultationsPage').then(m => ({ default: m.ConsultationsPage })));
+const NewConsultationPage = lazy(() => import('./pages/NewConsultationPage').then(m => ({ default: m.NewConsultationPage })));
+const ConsultationDetailPage = lazy(() => import('./pages/ConsultationDetailPage').then(m => ({ default: m.ConsultationDetailPage })));
+const PartnersPage = lazy(() => import('./pages/PartnersPage').then(m => ({ default: m.PartnersPage })));
+const SettingsPage = lazy(() => import('./pages/SettingsPage').then(m => ({ default: m.SettingsPage })));
 
 function PrivateRoute({ children, allowedRoles }: { children: React.ReactNode; allowedRoles?: string[] }) {
   const { user, isLoading, isAuthenticated } = useAuth();
@@ -39,6 +39,7 @@ function AppRoutes() {
   const { isAuthenticated } = useAuth();
 
   return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600" /></div>}>
     <Routes>
       <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
 
@@ -57,6 +58,7 @@ function AppRoutes() {
 
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
+    </Suspense>
   );
 }
 
